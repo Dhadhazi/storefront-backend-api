@@ -51,7 +51,7 @@ ProductsController.post(
   async (req: Request, res: Response, next: NextFunction) => {
     const { productId } = req.params;
     try {
-      res.send("Create a product");
+      res.send("Create a product, TOKEN required");
     } catch (e) {
       next(e);
     }

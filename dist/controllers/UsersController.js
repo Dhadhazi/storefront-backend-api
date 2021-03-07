@@ -42,7 +42,31 @@ exports.UsersController = express_1.Router();
 exports.UsersController.get("/", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         try {
-            res.send("Hello Users!");
+            res.send("List all the users, TOKEN reuqired");
+        }
+        catch (e) {
+            next(e);
+        }
+        return [2 /*return*/];
+    });
+}); });
+exports.UsersController.get("/:userId", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var userId;
+    return __generator(this, function (_a) {
+        userId = req.params.userId;
+        try {
+            res.send("Show a user with " + userId + " ID");
+        }
+        catch (e) {
+            next(e);
+        }
+        return [2 /*return*/];
+    });
+}); });
+exports.UsersController.post("/", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        try {
+            res.send("Create a user, TOKEN reuqired");
         }
         catch (e) {
             next(e);

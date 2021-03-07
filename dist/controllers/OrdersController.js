@@ -42,7 +42,18 @@ exports.OrdersController = express_1.Router();
 exports.OrdersController.get("/", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         try {
-            res.send("Hello Orders!");
+            res.send("Show current orders by user, TOKEN Reuqired");
+        }
+        catch (e) {
+            next(e);
+        }
+        return [2 /*return*/];
+    });
+}); });
+exports.OrdersController.get("/completed/", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        try {
+            res.send("Show completed orders by user, TOKEN Reuqired");
         }
         catch (e) {
             next(e);

@@ -90,7 +90,7 @@ exports.ProductsController.post("/", function (req, res, next) { return __awaite
     return __generator(this, function (_a) {
         productId = req.params.productId;
         try {
-            res.send("Create a product");
+            res.send("Create a product, TOKEN required");
         }
         catch (e) {
             next(e);
