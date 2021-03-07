@@ -1,17 +1,16 @@
 import express, { Request, Response } from "express";
-import connectToDatabase from "../utils/dbconnection";
 import config from "./config";
 import { routes } from "./routes";
 
 const app: express.Application = express();
 const port = config.PORT;
 
-connectToDatabase();
-
 app.use(express.json());
 
 app.get("/", function (req: Request, res: Response) {
-  res.send("Storefront Backend API, please roead REQUIREMENETS.md for routes");
+  res.send(
+    "Storefront Backend API, please read the REQUIREMENETS.md for routes"
+  );
 });
 
 routes(app);
