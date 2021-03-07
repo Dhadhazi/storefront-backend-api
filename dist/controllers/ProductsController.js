@@ -42,7 +42,55 @@ exports.ProductsController = express_1.Router();
 exports.ProductsController.get("/", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         try {
-            res.send("Hello Products!");
+            res.send("List all products");
+        }
+        catch (e) {
+            next(e);
+        }
+        return [2 /*return*/];
+    });
+}); });
+exports.ProductsController.get("/top/", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        try {
+            res.send("List TOP 5 products");
+        }
+        catch (e) {
+            next(e);
+        }
+        return [2 /*return*/];
+    });
+}); });
+exports.ProductsController.get("/category/", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        try {
+            res.send("List products ordered by category");
+        }
+        catch (e) {
+            next(e);
+        }
+        return [2 /*return*/];
+    });
+}); });
+exports.ProductsController.get("/:productId", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var productId;
+    return __generator(this, function (_a) {
+        productId = req.params.productId;
+        try {
+            res.send("Show a product with " + productId + " ID");
+        }
+        catch (e) {
+            next(e);
+        }
+        return [2 /*return*/];
+    });
+}); });
+exports.ProductsController.post("/", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var productId;
+    return __generator(this, function (_a) {
+        productId = req.params.productId;
+        try {
+            res.send("Create a product");
         }
         catch (e) {
             next(e);
