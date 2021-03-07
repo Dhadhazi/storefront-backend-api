@@ -1,9 +1,12 @@
 import express, { Request, Response } from "express";
+import connectToDatabase from "../utils/dbconnection";
 import config from "./config";
 import { routes } from "./routes";
 
 const app: express.Application = express();
 const port = config.PORT;
+
+connectToDatabase();
 
 app.use(express.json());
 
