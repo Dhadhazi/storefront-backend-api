@@ -8,6 +8,7 @@ const config = {
   POSTGRES_DB: process.env.POSTGRES_DB,
   POSTGRES_USER: process.env.POSTGRES_USER,
   POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
+  SECRET: process.env.SECRET || "Should use the ENV file",
 };
 
 export default config;

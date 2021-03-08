@@ -7,11 +7,13 @@ type User = {
   password: string;
 };
 
+const DATA_USER_GETS_BACK = "id, firstName, lastName";
+
 export class UserStore {
   async getAll(): Promise<User[]> {
     try {
       const data = await runQueryOnDatabase(
-        `SELECT id, firstName, lastName FROM users`
+        `SELECT ${DATA_USER_GETS_BACK} FROM users`
       );
       return data.rows;
     } catch (e) {
@@ -23,7 +25,7 @@ export class UserStore {
   async getUser(id: number): Promise<User> {
     try {
       const data = await runQueryOnDatabase(
-        `SELECT id, firstName, lastName FROM users WHERE id=($1)`,
+        `SELECT ${DATA_USER_GETS_BACK} FROM users WHERE id=($1)`,
         [id]
       );
       return data.rows[0];
@@ -40,7 +42,7 @@ export class UserStore {
   ): Promise<User> {
     try {
       const data = await runQueryOnDatabase(
-        `INSERT INTO users (firstName, lastName, password) VALUES ($1, $2, $3) RETURNING *`,
+        `INSERT INTO users (firstName, lastName, password) VALUES ($1, $2, $3) RETURNING ${DATA_USER_GETS_BACK}`,
         [firstName, lastName, password]
       );
       return data.rows[0];

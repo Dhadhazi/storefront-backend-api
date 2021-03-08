@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { UserStore } from "../models/User";
+import { createToken } from "../utils/jwt";
 import { encryptPassword } from "../utils/password";
 export const UsersController: Router = Router();
 
@@ -39,8 +40,9 @@ UsersController.post(
         throw new Error("firstName, lastName and password must be given");
       }
       const hashed = await encryptPassword(password);
-      const createUser = await store.createUser(firstName, lastName, hashed);
-      res.status(200).json(createUser);
+      const user = await store.createUser(firstName, lastName, hashed);
+      const token = createToken({ user });
+      res.status(200).json(token);
     } catch (e) {
       console.log("Catching");
       next(e);
