@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
+import { authMiddleware } from "../middlewares/authMiddleware";
 import { UserStore } from "../models/User";
-import { createToken } from "../utils/jwt";
+import { signToken } from "../utils/jwt";
 import { encryptPassword } from "../utils/password";
 export const UsersController: Router = Router();
 
@@ -8,6 +9,7 @@ const store = new UserStore();
 
 UsersController.get(
   "/",
+  authMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const allUsers = await store.getAll();
@@ -41,7 +43,7 @@ UsersController.post(
       }
       const hashed = await encryptPassword(password);
       const user = await store.createUser(firstName, lastName, hashed);
-      const token = createToken({ user });
+      const token = signToken({ user });
       res.status(200).json(token);
     } catch (e) {
       console.log("Catching");

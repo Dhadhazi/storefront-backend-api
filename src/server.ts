@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import config from "./config";
 import { routes } from "./routes";
-import { errorHandler } from "./utils/errorHandler";
+import { errorHandler } from "./middlewares/errorHandler";
 
 const app: express.Application = express();
 const port = config.PORT;
