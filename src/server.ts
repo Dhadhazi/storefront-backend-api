@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import config from "./config";
 import { routes } from "./routes";
+import { errorHandler } from "./utils/errorHandler";
 
 const app: express.Application = express();
 const port = config.PORT;
@@ -14,6 +15,8 @@ app.get("/", function (req: Request, res: Response) {
 });
 
 routes(app);
+
+app.use(errorHandler);
 
 app.listen(port, function () {
   console.log(`Server is listening on port ${port}`);

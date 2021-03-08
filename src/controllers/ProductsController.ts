@@ -2,14 +2,14 @@ import { NextFunction, Request, Response, Router } from "express";
 import { ProductStore } from "../models/Product";
 export const ProductsController: Router = Router();
 
-const Store = new ProductStore();
+const store = new ProductStore();
 
 ProductsController.get(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const allProducts = await Store.getAll();
-      res.send(allProducts);
+      const allProducts = await store.getAll();
+      res.status(200).json(allProducts);
     } catch (e) {
       next(e);
     }
