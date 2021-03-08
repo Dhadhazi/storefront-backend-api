@@ -17,6 +17,19 @@ ProductsController.get(
 );
 
 ProductsController.get(
+  "/:productId",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const productId = parseInt(req.params.productId);
+    try {
+      const product = await store.getProduct(productId);
+      res.status(200).json(product);
+    } catch (e) {
+      next(e);
+    }
+  }
+);
+
+ProductsController.get(
   "/top/",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -32,18 +45,6 @@ ProductsController.get(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       res.send("List products ordered by category");
-    } catch (e) {
-      next(e);
-    }
-  }
-);
-
-ProductsController.get(
-  "/:productId",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { productId } = req.params;
-    try {
-      res.send(`Show a product with ${productId} ID`);
     } catch (e) {
       next(e);
     }
