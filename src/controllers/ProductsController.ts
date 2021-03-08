@@ -17,12 +17,11 @@ ProductsController.get(
 );
 
 ProductsController.get(
-  "/:productId",
+  "/category/",
   async (req: Request, res: Response, next: NextFunction) => {
-    const productId = parseInt(req.params.productId);
     try {
-      const product = await store.getProduct(productId);
-      res.status(200).json(product);
+      const allProducts = await store.getAllByCategory();
+      res.status(200).json(allProducts);
     } catch (e) {
       next(e);
     }
@@ -41,10 +40,12 @@ ProductsController.get(
 );
 
 ProductsController.get(
-  "/category/",
+  "/:productId",
   async (req: Request, res: Response, next: NextFunction) => {
+    const productId = parseInt(req.params.productId);
     try {
-      res.send("List products ordered by category");
+      const product = await store.getProduct(productId);
+      res.status(200).json(product);
     } catch (e) {
       next(e);
     }

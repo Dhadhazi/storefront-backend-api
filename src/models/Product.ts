@@ -18,6 +18,18 @@ export class ProductStore {
     }
   }
 
+  async getAllByCategory(): Promise<Product[]> {
+    try {
+      const data = await runQueryOnDatabase(
+        `SELECT * FROM products ORDER BY category ASC`
+      );
+      return data.rows;
+    } catch (e) {
+      console.log(e);
+      throw new Error(`Cannot get products ${e}`);
+    }
+  }
+
   async getProduct(id: number): Promise<Product> {
     try {
       const data = await runQueryOnDatabase(
@@ -27,7 +39,7 @@ export class ProductStore {
       return data.rows[0];
     } catch (e) {
       console.log(e);
-      throw new Error(`Cannot get products ${e}`);
+      throw new Error(`Cannot get product ${e}`);
     }
   }
 
@@ -44,7 +56,7 @@ export class ProductStore {
       return data.rows[0];
     } catch (e) {
       console.log(e);
-      throw new Error(`Cannot get products ${e}`);
+      throw new Error(`Could not add product ${e}`);
     }
   }
 }
