@@ -8,6 +8,31 @@ type User = {
 };
 
 export class UserStore {
+  async getAll(): Promise<User[]> {
+    try {
+      const data = await runQueryOnDatabase(
+        `SELECT id, firstName, lastName FROM users`
+      );
+      return data.rows;
+    } catch (e) {
+      console.log(e);
+      throw new Error(`Cannot get users ${e}`);
+    }
+  }
+
+  async getUser(id: number): Promise<User> {
+    try {
+      const data = await runQueryOnDatabase(
+        `SELECT id, firstName, lastName FROM users WHERE id=($1)`,
+        [id]
+      );
+      return data.rows[0];
+    } catch (e) {
+      console.log(e);
+      throw new Error(`Cannot get user ${e}`);
+    }
+  }
+
   async createUser(
     firstName: string,
     lastName: string,

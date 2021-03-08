@@ -9,7 +9,8 @@ UsersController.get(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      res.send("List all the users, TOKEN required");
+      const allUsers = await store.getAll();
+      res.status(200).json(allUsers);
     } catch (e) {
       next(e);
     }
@@ -19,9 +20,10 @@ UsersController.get(
 UsersController.get(
   "/:userId",
   async (req: Request, res: Response, next: NextFunction) => {
-    const { userId } = req.params;
+    const userId = parseInt(req.params.userId);
     try {
-      res.send(`Show a user with ${userId} ID, TOKEN required`);
+      const allUsers = await store.getUser(userId);
+      res.status(200).json(allUsers);
     } catch (e) {
       next(e);
     }
@@ -37,8 +39,8 @@ UsersController.post(
         throw new Error("firstName, lastName and password must be given");
       }
       const hashed = await encryptPassword(password);
-      const createProduct = await store.createUser(firstName, lastName, hashed);
-      res.status(200).json(createProduct);
+      const createUser = await store.createUser(firstName, lastName, hashed);
+      res.status(200).json(createUser);
     } catch (e) {
       console.log("Catching");
       next(e);
