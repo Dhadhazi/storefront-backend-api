@@ -12,7 +12,8 @@ OrdersController.get(
     try {
       // @ts-ignore: Getting user from req
       const user = req.user;
-      res.send(`Show current orders by id: ${user.id}`);
+      const orders = await store.getOpenOrders(user.id);
+      res.status(200).json(orders);
     } catch (e) {
       next(e);
     }
@@ -21,9 +22,13 @@ OrdersController.get(
 
 OrdersController.get(
   "/completed/",
+  authMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      res.send("Show completed orders by user, TOKEN Reuqired");
+      // @ts-ignore: Getting user from req
+      const user = req.user;
+      const orders = await store.getCompletedOrders(user.id);
+      res.status(200).json(orders);
     } catch (e) {
       next(e);
     }

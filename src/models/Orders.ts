@@ -15,6 +15,22 @@ type Order = {
 };
 
 export class OrderStore {
+  async getOpenOrders(userId: number): Promise<Order[]> {
+    const data = await runQueryOnDatabase(
+      `SELECT * FROM orders INNER JOIN order_products ON orders.id = order_products.order_id WHERE user_id=$1 AND completed = false`,
+      [userId]
+    );
+    return data.rows;
+  }
+
+  async getCompletedOrders(userId: number): Promise<Order[]> {
+    const data = await runQueryOnDatabase(
+      `SELECT * FROM orders INNER JOIN order_products ON orders.id = order_products.order_id WHERE user_id=$1 AND completed = true`,
+      [userId]
+    );
+    return data.rows;
+  }
+
   async addProduct(
     quantity: number,
     orderId: number,
