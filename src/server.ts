@@ -6,7 +6,7 @@ import { errorHandler } from "./utils/errorHandler";
 const app: express.Application = express();
 const port = config.PORT;
 
-app.use(express.json());
+app.use(express.urlencoded());
 
 app.get("/", function (req: Request, res: Response) {
   res.send(

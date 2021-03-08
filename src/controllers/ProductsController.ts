@@ -53,9 +53,11 @@ ProductsController.get(
 ProductsController.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
-    const { productId } = req.params;
+    const { name, category } = req.body;
+    const price = Number(req.body.price);
     try {
-      res.send("Create a product, TOKEN required");
+      const createProduct = await store.addProduct(name, price, category);
+      res.status(200).json(createProduct);
     } catch (e) {
       next(e);
     }
