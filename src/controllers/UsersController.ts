@@ -1,5 +1,8 @@
 import { NextFunction, Request, Response, Router } from "express";
+import { UserStore } from "../models/User";
 export const UsersController: Router = Router();
+
+const store = new UserStore();
 
 UsersController.get(
   "/",
@@ -27,8 +30,15 @@ UsersController.get(
 UsersController.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
+    const { firstName, lastName } = req.body;
+    const password = req.body.password;
     try {
-      res.send("Create a user, TOKEN required");
+      const createProduct = await store.createUser(
+        firstName,
+        lastName,
+        password
+      );
+      res.status(200).json(createProduct);
     } catch (e) {
       next(e);
     }
