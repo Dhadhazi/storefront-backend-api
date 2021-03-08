@@ -27,24 +27,45 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## Data Shapes
 
-#### Product
+#### Products
 
-- id
-- name
-- price
-- [OPTIONAL] category
+##### Table name: products
 
-#### User
-
-- id
-- firstName
-- lastName
-- password
+| name     | type                  |
+| -------- | --------------------- |
+| id       | SERIAL PRIMARY KEY    |
+| name     | VARCHAR(100) NOT NULL |
+| price    | INTEGER               |
+| category | VARCHAR(50)           |
 
 #### Orders
 
-- id
-- user_id
-- status of order (active or complete)
+##### Table name: users
+
+| name      | type               |
+| --------- | ------------------ |
+| id        | SERIAL PRIMARY KEY |
+| firstName | VARCHAR(100)       |
+| lastName  | VARCHAR(100)       |
+| password  | VARCHAR(50)        |
+
+#### Orders
+
+##### Table name: orders
+
+| name      | type                        |
+| --------- | --------------------------- |
+| id        | SERIAL PRIMARY KEY          |
+| completed | BOOLEAN                     |
+| user_id   | BIGINT REFERENCES users(id) |
 
 #### Order to Products table
+
+##### Table name: order_products
+
+| name        | type                           |
+| ----------- | ------------------------------ |
+| id          | SERIAL PRIMARY KEY             |
+| quantity    | INTEGER                        |
+| order_id    | BIGINT REFERENCES orders(id)   |
+| products_id | BIGINT REFERENCES products(id) |
