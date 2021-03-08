@@ -22,6 +22,7 @@ UsersController.get(
 
 UsersController.get(
   "/:userId",
+  authMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     const userId = parseInt(req.params.userId);
     try {
@@ -35,6 +36,7 @@ UsersController.get(
 
 UsersController.post(
   "/",
+  authMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     const { firstName, lastName, password } = req.body;
     try {

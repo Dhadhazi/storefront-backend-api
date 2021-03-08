@@ -12,6 +12,11 @@ export interface RequestCustom extends Request {
   user: User;
 }
 
+/*
+Puts the user data into the req object, but because Typescript does not like it had to do a workaround
+When reading it, just use: // @ts-ignore: Getting user from req
+*/
+
 export function authMiddleware(
   expressRequest: Request,
   res: Response,

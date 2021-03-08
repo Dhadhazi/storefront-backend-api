@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response, Router } from "express";
+import { authMiddleware } from "../middlewares/authMiddleware";
 import { ProductStore } from "../models/Product";
 export const ProductsController: Router = Router();
 
@@ -54,6 +55,7 @@ ProductsController.get(
 
 ProductsController.post(
   "/",
+  authMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     const { name, category } = req.body;
     const price = Number(req.body.price);
