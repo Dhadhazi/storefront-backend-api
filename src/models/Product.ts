@@ -1,4 +1,4 @@
-import runQueryOnDatabase from "../utils/runQueryOnDatabse";
+import runQueryOnDatabase from "../utils/runQueryOnDatabase";
 
 type Product = {
   id: number;
