@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { UserStore } from "../models/User";
+import { encryptPassword } from "../utils/password";
 export const UsersController: Router = Router();
 
 const store = new UserStore();
@@ -30,16 +31,16 @@ UsersController.get(
 UsersController.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
-    const { firstName, lastName } = req.body;
-    const password = req.body.password;
+    const { firstName, lastName, password } = req.body;
     try {
-      const createProduct = await store.createUser(
-        firstName,
-        lastName,
-        password
-      );
+      if (!firstName || !lastName || !password) {
+        throw new Error("firstName, lastName and password must be given");
+      }
+      const hashed = await encryptPassword(password);
+      const createProduct = await store.createUser(firstName, lastName, hashed);
       res.status(200).json(createProduct);
     } catch (e) {
+      console.log("Catching");
       next(e);
     }
   }

@@ -47,7 +47,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 | id        | SERIAL PRIMARY KEY |
 | firstName | VARCHAR(100)       |
 | lastName  | VARCHAR(100)       |
-| password  | VARCHAR(50)        |
+| password  | VARCHAR(100)       |
 
 #### Orders
 
