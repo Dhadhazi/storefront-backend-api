@@ -1,11 +1,15 @@
 import { NextFunction, Request, Response, Router } from "express";
+import { ProductStore } from "../models/Product";
 export const ProductsController: Router = Router();
+
+const Store = new ProductStore();
 
 ProductsController.get(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      res.send("List all products");
+      const allProducts = await Store.getAll();
+      res.send(allProducts);
     } catch (e) {
       next(e);
     }
