@@ -30,6 +30,22 @@ export class ProductStore {
     }
   }
 
+  async getTop5(): Promise<Product[]> {
+    try {
+      const data = await runQueryOnDatabase(
+        `SELECT SUM(quantity), (SELECT name FROM products WHERE order_products.product_id = products.id)
+          FROM order_products 
+          GROUP BY product_id
+          ORDER BY SUM (quantity) 
+          DESC LIMIT 5;`
+      );
+      return data.rows;
+    } catch (e) {
+      console.log(e);
+      throw new Error(`Cannot get products ${e}`);
+    }
+  }
+
   async getProduct(id: number): Promise<Product> {
     try {
       const data = await runQueryOnDatabase(

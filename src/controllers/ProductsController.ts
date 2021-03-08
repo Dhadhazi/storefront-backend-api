@@ -33,7 +33,8 @@ ProductsController.get(
   "/top/",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      res.send("List TOP 5 products");
+      const top = await store.getTop5();
+      res.status(200).json(top);
     } catch (e) {
       next(e);
     }
