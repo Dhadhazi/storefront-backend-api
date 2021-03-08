@@ -38,7 +38,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 | price    | INTEGER               |
 | category | VARCHAR(50)           |
 
-#### Orders
+#### Users
 
 ##### Table name: users
 
@@ -63,9 +63,9 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ##### Table name: order_products
 
-| name        | type                           |
-| ----------- | ------------------------------ |
-| id          | SERIAL PRIMARY KEY             |
-| quantity    | INTEGER                        |
-| order_id    | BIGINT REFERENCES orders(id)   |
-| products_id | BIGINT REFERENCES products(id) |
+| name       | type                           |
+| ---------- | ------------------------------ |
+| id         | SERIAL PRIMARY KEY             |
+| quantity   | INTEGER                        |
+| order_id   | BIGINT REFERENCES orders(id)   |
+| product_id | BIGINT REFERENCES products(id) |
