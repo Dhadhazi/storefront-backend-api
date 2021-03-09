@@ -26,22 +26,24 @@ After that, to run the tests just enter _npm run test_
 
 ### database.json shape
 
+```
 {
-"dev": {
-"driver": "pg",
-"host": "",
-"database": "",
-"user": "",
-"password": ""
-},
-"test": {
-"driver": "pg",
-"host": "",
-"database": "",
-"user": "",
-"password": ""
+  "dev": {
+    "driver": "pg",
+    "host": "",
+    "database": "",
+    "user": "",
+    "password": ""
+    },
+  "test": {
+    "driver": "pg",
+    "host": "",
+    "database": "",
+    "user": "",
+    "password": ""
+  }
 }
-}
+```
 
 ### .env requirements
 
