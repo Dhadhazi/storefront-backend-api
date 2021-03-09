@@ -14,6 +14,16 @@ All the endpoints can be found in the REQUIREMENTS.md file
 - Start the app with NPM start
 - Application runs in port 8000 by default (can be changed in config)
 
+## Tests
+
+To be able to run tests, the app needs a test database. Either add it directly to config (under tests) or better, define the details in .env file:
+POSTGRES_TEST_HOST - the host address
+POSTGRES_TEST_DB - name of the database
+POSTGRES_TEST_USER - username
+POSTGRES_TEST_PASSWORD - password
+
+After that, to run the tests just enter _npm run test_
+
 ### database.json shape
 
 {
