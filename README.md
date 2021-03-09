@@ -14,7 +14,7 @@ All the endpoints can be found in the REQUIREMENTS.md file
 - Start the app with NPM start
 - Application runs in port 8000 by default (can be changed in config)
 
-### database.json requirements
+### database.json shape
 
 {
 "dev": {

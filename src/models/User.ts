@@ -1,6 +1,6 @@
 import runQueryOnDatabase from "../utils/runQueryOnDatabase";
 
-type User = {
+export type User = {
   id: number;
   firstName: string;
   lastName: number;

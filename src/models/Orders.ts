@@ -1,13 +1,13 @@
 import runQueryOnDatabase from "../utils/runQueryOnDatabase";
 
-type ProductOrder = {
+export type ProductOrder = {
   id: number;
   name: string;
   price: number;
   quantity: number;
 };
 
-type Order = {
+export type Order = {
   id: number;
   completed: boolean;
   user_id: number;
