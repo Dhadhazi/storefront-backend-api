@@ -11,7 +11,14 @@ export type Order = {
   id: number;
   completed: boolean;
   user_id: number;
-  orderedProducts: ProductOrder[];
+  orderedProducts?: ProductOrder[];
+};
+
+type Order_Products = {
+  id: number;
+  quantity: number;
+  order_id: number;
+  product_id: number;
 };
 
 export class OrderStore {
@@ -35,7 +42,7 @@ export class OrderStore {
     quantity: number,
     orderId: number,
     productId: number
-  ): Promise<Order> {
+  ): Promise<Order_Products> {
     const data = await runQueryOnDatabase(
       `INSERT INTO order_products (quantity, order_id, product_id) VALUES ($1, $2, $3) RETURNING *`,
       [quantity, orderId, productId]
