@@ -55,4 +55,12 @@ describe("User Model tests", () => {
       lastname: "Tset",
     });
   });
+  it("Gets all the users", async () => {
+    const data = await USER.getAll();
+    expect(data.length).toBeGreaterThan(0);
+  });
+  it("Gets user by ID", async () => {
+    const data = await USER.getUser(user.id);
+    expect(data).toEqual(data);
+  });
 });
