@@ -2,13 +2,13 @@
 Testing the models in one file, because the order of the tests matters
 */
 
-import { ProductStore } from "../models/Product";
+import { Product, ProductStore } from "../models/Product";
 
 const PRODUCT = new ProductStore();
 
 // Declaring products for later tests
-let product1;
-let product2;
+let product1: Product;
+let product2: Product;
 
 describe("Products Model tests", () => {
   it("Adds a products with test category", async () => {
@@ -19,5 +19,22 @@ describe("Products Model tests", () => {
       price: 1,
       category: "Test",
     });
+  });
+  it("Adds a products with NotTest category", async () => {
+    product2 = await PRODUCT.addProduct("Product2", 2, "NotTest");
+    expect(product2).toEqual({
+      id: 2,
+      name: "Product2",
+      price: 2,
+      category: "NotTest",
+    });
+  });
+  it("Returns a product based on it's ID", async () => {
+    const data = await PRODUCT.getProduct(1);
+    expect(data).toEqual(product1);
+  });
+  it("Returns all the products", async () => {
+    const data = await PRODUCT.getAll();
+    expect(data.length).toEqual(2);
   });
 });
