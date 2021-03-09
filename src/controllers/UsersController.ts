@@ -39,6 +39,7 @@ UsersController.post(
   authMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     const { firstName, lastName, password } = req.body;
+
     try {
       if (!firstName || !lastName || !password) {
         throw new Error("firstName, lastName and password must be given");

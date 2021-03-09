@@ -1,10 +1,12 @@
 import supertest from "supertest";
 import { app } from "../server";
-import { signToken } from "../utils/jwt";
+import { signToken, tokenToData } from "../utils/jwt";
+import { User } from "../models/User";
 
 const request = supertest(app);
 const BadUser = signToken({});
 const FakeUserForAuth = signToken({ user: {} });
+let RealUser: User;
 
 describe("API Endpoint Tests", () => {
   describe("/ endpoint test, server running", () => {
@@ -38,14 +40,39 @@ describe("API Endpoint Tests", () => {
       done();
     });
   });
+
   describe("USERS/ endpoint", () => {
     it("Create new user at /post", async (done) => {
-      const response = await request.get("/");
+      const response = await request
+        .post("/users")
+        .type("form")
+        .send({ firstName: "Test", lastName: "Elek", password: "password" })
+        .set("Authorization", `Bearer ${FakeUserForAuth}`);
       expect(response.status).toBe(200);
+      RealUser = tokenToData(response.text.slice(1, -1)).user;
+      done();
+    });
+    it("List all users", async (done) => {
+      const response = await request
+        .get("/users")
+        .set("Authorization", `Bearer ${FakeUserForAuth}`)
+        .expect("Content-Type", /json/);
+      expect(response.status).toBe(200);
+      expect(response.body.length).toBeGreaterThan(0);
+      done();
+    });
+    it("Get user by ID", async (done) => {
+      const response = await request
+        .get(`/users/${RealUser.id}`)
+        .set("Authorization", `Bearer ${FakeUserForAuth}`)
+        .expect("Content-Type", /json/);
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(RealUser);
       done();
     });
   });
 });
+
 /*
 #### Products
 - Index - GET products/
