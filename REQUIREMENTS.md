@@ -12,7 +12,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Show - GET products/:id
 - Create [token required] POST products/
 - [OPTIONAL] Top 5 most popular products GET products/top/
-- [OPTIONAL] Products by category (args: product category) GET products/category/
+- [OPTIONAL] Products by category (args: product category) GET products/category/:category
 
 #### Users
 

@@ -37,4 +37,8 @@ describe("Products Model tests", () => {
     const data = await PRODUCT.getAll();
     expect(data.length).toEqual(2);
   });
+  it("Returns all the products in Test category", async () => {
+    const data = await PRODUCT.getAllByCategory("Test");
+    expect(data[0]).toEqual(product1);
+  });
 });
