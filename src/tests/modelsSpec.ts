@@ -3,12 +3,15 @@ Testing the models in one file, because the order of the tests matters
 */
 
 import { Product, ProductStore } from "../models/Product";
+import { User, UserStore } from "../models/User";
 
 const PRODUCT = new ProductStore();
+const USER = new UserStore();
 
 // Declaring products for later tests
 let product1: Product;
 let product2: Product;
+let user: User;
 
 describe("Products Model tests", () => {
   it("Adds a products with test category", async () => {
@@ -40,5 +43,16 @@ describe("Products Model tests", () => {
   it("Returns all the products in Test category", async () => {
     const data = await PRODUCT.getAllByCategory("Test");
     expect(data[0]).toEqual(product1);
+  });
+});
+
+describe("User Model tests", () => {
+  it("Creates a user", async () => {
+    user = await USER.createUser("Test", "Tset", "password");
+    expect(user).toEqual({
+      id: 1,
+      firstname: "Test",
+      lastname: "Tset",
+    });
   });
 });

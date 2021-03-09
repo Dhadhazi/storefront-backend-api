@@ -2,12 +2,12 @@ import runQueryOnDatabase from "../utils/runQueryOnDatabase";
 
 export type User = {
   id: number;
-  firstName: string;
-  lastName: number;
-  password: string;
+  firstname: string;
+  lastname: string;
+  password?: string;
 };
 
-const DATA_USER_GETS_BACK = "id, firstName, lastName";
+const DATA_USER_GETS_BACK = "id, firstname, lastname";
 
 export class UserStore {
   async getAll(): Promise<User[]> {
@@ -42,7 +42,7 @@ export class UserStore {
   ): Promise<User> {
     try {
       const data = await runQueryOnDatabase(
-        `INSERT INTO users (firstName, lastName, password) VALUES ($1, $2, $3) RETURNING ${DATA_USER_GETS_BACK}`,
+        `INSERT INTO users (firstname, lastname, password) VALUES ($1, $2, $3) RETURNING ${DATA_USER_GETS_BACK}`,
         [firstName, lastName, password]
       );
       return data.rows[0];

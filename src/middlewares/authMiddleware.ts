@@ -1,11 +1,6 @@
 import { Request, Response, NextFunction } from "express";
+import { User } from "../models/User";
 import { tokenToData } from "../utils/jwt";
-
-type User = {
-  id: number;
-  firstName: string;
-  lastName: number;
-};
 
 // Creating custom interface for the req, so typescripts accept the user object on it
 export interface RequestCustom extends Request {
