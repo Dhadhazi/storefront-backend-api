@@ -18,10 +18,11 @@ export class ProductStore {
     }
   }
 
-  async getAllByCategory(): Promise<Product[]> {
+  async getAllByCategory(category: string): Promise<Product[]> {
     try {
       const data = await runQueryOnDatabase(
-        `SELECT * FROM products ORDER BY category ASC`
+        `SELECT * FROM products WHERE category=$1`,
+        [category]
       );
       return data.rows;
     } catch (e) {

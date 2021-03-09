@@ -18,10 +18,11 @@ ProductsController.get(
 );
 
 ProductsController.get(
-  "/category/",
+  "/category/:category",
   async (req: Request, res: Response, next: NextFunction) => {
+    const category = req.params.category;
     try {
-      const allProducts = await store.getAllByCategory();
+      const allProducts = await store.getAllByCategory(category);
       res.status(200).json(allProducts);
     } catch (e) {
       next(e);

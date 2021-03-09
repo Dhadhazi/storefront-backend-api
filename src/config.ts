@@ -1,8 +1,6 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
-console.log(process.env.ENV);
-
 let config;
 
 if (process.env.ENV === "test") {
