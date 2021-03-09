@@ -84,17 +84,17 @@ describe("MODEL TESTS", () => {
     });
   });
 
-  // This test only runs if the DB is empty, or at least does not have other tests before it
-  // describe("Products top list Model tests", () => {
-  //   it("Gets the top selling products list", async () => {
-  //     const data = await PRODUCT.getTop5();
-  //     expect(data[0].name).toBe(product1.name);
-  //   });
-  //   it("Gets the top selling products list with new combined top", async () => {
-  //     await ORDER.addProduct(4000, order.id, product2.id);
-  //     await ORDER.addProduct(4000, order.id, product2.id);
-  //     const data = await PRODUCT.getTop5();
-  //     expect(data[0].name).toBe(product2.name);
-  //   });
-  // });
+  // This test only passes if the DB is empty before running, or at least does not have other tests before it
+  describe("Products top list Model tests", () => {
+    it("Gets the top selling products list", async () => {
+      const data = await PRODUCT.getTop5();
+      expect(data[0].name).toBe(product1.name);
+    });
+    it("Gets the top selling products list with new combined top", async () => {
+      await ORDER.addProduct(4000, order.id, product2.id);
+      await ORDER.addProduct(4000, order.id, product2.id);
+      const data = await PRODUCT.getTop5();
+      expect(data[0].name).toBe(product2.name);
+    });
+  });
 });

@@ -10,7 +10,7 @@ A storefront backend made for the Udacity Full Stack Javascript Nanodegree, ther
 - Create a [database.json based on the requirements](#database.json) and migrate the DBs
 - Run NPM install to install the node packages
 - Start the app with NPM start
-- Application runs in port 8000 by default (can be changed in config)
+- Application runs in port 8000 by default (can be changed in config), database runs in port you set it up
 
 ## Tests
 

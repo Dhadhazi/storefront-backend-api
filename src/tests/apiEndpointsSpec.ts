@@ -160,15 +160,17 @@ describe("API Endpoint Tests", () => {
       done();
     });
   });
+
+  // This test only passes if the DB is empty before running, or at least does not have other tests before it
+  describe("Products top list API endpoint tests", () => {
+    it("Gets the top selling products list", async (done) => {
+      const response = await request
+        .get("/products/top")
+        .set("Authorization", `Bearer ${RealUserToken}`)
+        .expect("Content-Type", /json/);
+      expect(response.status).toBe(200);
+      expect(response.body[0].name).toBe(product1.name);
+      done();
+    });
+  });
 });
-
-/*
-#### Products
-- [OPTIONAL] Top 5 most popular products GET products/top/
-
-#### Orders
-- Current Order by user (args: user id)[token required] orders/
-- [OPTIONAL] Completed Orders by user (args: user id)[token required] orders/completed/
-- [ADDED FOR TESTING] Creating an order [token required] orders/createOrder/
-- [ADDED FOR TESTING] Add product to order [token required] orders/:orderId
-*/
