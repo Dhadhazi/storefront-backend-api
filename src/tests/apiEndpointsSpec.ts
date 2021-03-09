@@ -1,24 +1,51 @@
 import supertest from "supertest";
 import { app } from "../server";
+import { signToken } from "../utils/jwt";
 
 const request = supertest(app);
-describe("Test endpoint responses", () => {
-  it("gets the api endpoint", async (done) => {
-    const response = await request.get("/");
-    expect(response.status).toBe(200);
-    done();
+const BadUser = signToken({});
+const FakeUserForAuth = signToken({ user: {} });
+
+describe("API Endpoint Tests", () => {
+  describe("/ endpoint test, server running", () => {
+    it("gets the api endpoint", async (done) => {
+      const response = await request.get("/");
+      expect(response.status).toBe(200);
+      done();
+    });
+  });
+  describe("Authentication tests", () => {
+    it("Deny authentication because no header", async (done) => {
+      const response = await request.post("/users");
+      expect(response.status).toBe(401);
+      done();
+    });
+    it("Deny authentication because invalid token", async (done) => {
+      const response = await request
+        .post("/users")
+        .set(
+          "Authorization",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXJ1c2VyIjp7ImlkIjoxMSwiZmW4iLCJsYXN0bmFtZSI6ImFkbWluIn0sImlhdCI6MTYxNTIwNTI5OH0.ckOCsxsoAlZk48MbMSyk_Aw-r1w8OIFxho2-ko1_eZQ"
+        );
+      expect(response.status).toBe(400);
+      done();
+    });
+    it("Deny authentication because token error - no user", async (done) => {
+      const response = await request
+        .post("/users")
+        .set("Authorization", `Bearer ${BadUser}`);
+      expect(response.status).toBe(404);
+      done();
+    });
+  });
+  describe("USERS/ endpoint", () => {
+    it("Create new user at /post", async (done) => {
+      const response = await request.get("/");
+      expect(response.status).toBe(200);
+      done();
+    });
   });
 });
-
-// describe("API Endpoint Tests", () => {
-//   describe("Useres endpoints /users", () => {
-//     it("Creates a new user - POST users/", () => {
-
-//     })
-//   })
-
-// })
-
 /*
 #### Products
 - Index - GET products/

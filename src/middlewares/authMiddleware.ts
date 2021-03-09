@@ -27,6 +27,7 @@ export function authMiddleware(
   } else {
     try {
       const data = tokenToData(auth[1]);
+
       if (!data.user) {
         return res
           .status(404)
