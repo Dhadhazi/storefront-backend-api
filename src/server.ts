@@ -3,15 +3,17 @@ import config from "./config";
 import { routes } from "./routes";
 import { errorHandler } from "./middlewares/errorHandler";
 
-const app: express.Application = express();
+export const app: express.Application = express();
 const port = config.PORT;
 
 app.use(express.urlencoded());
 
 app.get("/", function (req: Request, res: Response) {
-  res.send(
-    "Storefront Backend API, please read the REQUIREMENETS.md for routes"
-  );
+  res
+    .status(200)
+    .send(
+      "Storefront Backend API, please read the REQUIREMENETS.md for routes"
+    );
 });
 
 routes(app);

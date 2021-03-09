@@ -84,6 +84,7 @@ describe("MODEL TESTS", () => {
     });
   });
 
+  // This test only runs if the DB is empty, or at least does not have other tests before it
   describe("Products top list Model tests", () => {
     it("Gets the top selling products list", async () => {
       const data = await PRODUCT.getTop5();
