@@ -3,13 +3,16 @@ import { app } from "../server";
 import { signToken, tokenToData } from "../utils/jwt";
 import { User } from "../models/User";
 import { Product } from "../models/Product";
+import { Order } from "../models/Orders";
 
 const request = supertest(app);
 const BadUser = signToken({});
 const FakeUserForAuth = signToken({ user: {} });
 let RealUser: User;
+let RealUserToken: string;
 let product1: Product;
 let product2: Product;
+let order: Order;
 
 describe("API Endpoint Tests", () => {
   describe("/ endpoint test, server running", () => {
@@ -45,14 +48,15 @@ describe("API Endpoint Tests", () => {
   });
 
   describe("USERS/ endpoint", () => {
-    it("Create new user at /post", async (done) => {
+    it("Create new user at / - POST", async (done) => {
       const response = await request
         .post("/users")
         .type("form")
         .send({ firstName: "Test", lastName: "Elek", password: "password" })
         .set("Authorization", `Bearer ${FakeUserForAuth}`);
       expect(response.status).toBe(200);
-      RealUser = tokenToData(response.body).user;
+      RealUserToken = response.body;
+      RealUser = tokenToData(RealUserToken).user;
       done();
     });
     it("List all users", async (done) => {
@@ -75,7 +79,7 @@ describe("API Endpoint Tests", () => {
     });
   });
   describe("PRODUCTS/ endpoint", () => {
-    it("Create new product at /post", async (done) => {
+    it("Create new product at / - POST", async (done) => {
       const response = await request
         .post("/products")
         .type("form")
@@ -109,7 +113,50 @@ describe("API Endpoint Tests", () => {
         .get(`/products/category/${product1.category}`)
         .expect("Content-Type", /json/);
       expect(response.status).toBe(200);
-      expect(response.body[0]).toEqual(product1);
+      expect(response.body[0].category).toEqual(product1.category);
+      done();
+    });
+  });
+  describe("ORDERS/ endpoint", () => {
+    it("Create new order at /createOrder - POST", async (done) => {
+      const response = await request
+        .post("/orders/createOrder")
+        .set("Authorization", `Bearer ${RealUserToken}`)
+        .expect("Content-Type", /json/);
+      expect(response.status).toBe(200);
+      order = response.body;
+      expect(order.completed).toBe(false);
+      expect(order.user_id).toBe(RealUser.id);
+      done();
+    });
+    it("Add a product to the order /:id - POST", async (done) => {
+      const response = await request
+        .post(`/orders/${order.id}`)
+        .set("Authorization", `Bearer ${RealUserToken}`)
+        .type("form")
+        .send({ quantity: 2000, productId: product1.id })
+        .expect("Content-Type", /json/);
+      expect(response.status).toBe(200);
+      expect(response.body.quantity).toBe(2000);
+      expect(response.body.order_id).toBe(order.id);
+      done();
+    });
+    it("List all incomplete orders", async (done) => {
+      const response = await request
+        .get("/orders")
+        .set("Authorization", `Bearer ${RealUserToken}`)
+        .expect("Content-Type", /json/);
+      expect(response.status).toBe(200);
+      expect(response.body.length).toBe(1);
+      done();
+    });
+    it("List all completed orders", async (done) => {
+      const response = await request
+        .get("/orders/completed")
+        .set("Authorization", `Bearer ${RealUserToken}`)
+        .expect("Content-Type", /json/);
+      expect(response.status).toBe(200);
+      expect(response.body.length).toBe(0);
       done();
     });
   });
@@ -117,12 +164,7 @@ describe("API Endpoint Tests", () => {
 
 /*
 #### Products
-- Index - GET products/
-- Show - GET products/:id
-- Create [token required] POST products/ DONE
 - [OPTIONAL] Top 5 most popular products GET products/top/
-- [OPTIONAL] Products by category (args: product category) GET products/category/:category
-
 
 #### Orders
 - Current Order by user (args: user id)[token required] orders/
