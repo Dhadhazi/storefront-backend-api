@@ -15,33 +15,27 @@ let user: User;
 
 describe("Products Model tests", () => {
   it("Adds a products with test category", async () => {
-    product1 = await PRODUCT.addProduct("Product1", 1, "Test");
-    expect(product1).toEqual({
-      id: 1,
-      name: "Product1",
-      price: 1,
-      category: "Test",
-    });
+    product1 = await PRODUCT.addProduct("Product1", 1, "ProductsTest");
+    expect(product1.category).toEqual("ProductsTest");
+    expect(product1.name).toEqual("Product1");
+    expect(product1.price).toEqual(1);
   });
   it("Adds a products with NotTest category", async () => {
     product2 = await PRODUCT.addProduct("Product2", 2, "NotTest");
-    expect(product2).toEqual({
-      id: 2,
-      name: "Product2",
-      price: 2,
-      category: "NotTest",
-    });
+    expect(product2.category).toEqual("NotTest");
+    expect(product2.name).toEqual("Product2");
+    expect(product2.price).toEqual(2);
   });
   it("Returns a product based on it's ID", async () => {
-    const data = await PRODUCT.getProduct(1);
+    const data = await PRODUCT.getProduct(product1.id);
     expect(data).toEqual(product1);
   });
   it("Returns all the products", async () => {
     const data = await PRODUCT.getAll();
-    expect(data.length).toEqual(2);
+    expect(data.length).toBeGreaterThan(1);
   });
   it("Returns all the products in Test category", async () => {
-    const data = await PRODUCT.getAllByCategory("Test");
+    const data = await PRODUCT.getAllByCategory("ProductsTest");
     expect(data[0]).toEqual(product1);
   });
 });
@@ -49,11 +43,8 @@ describe("Products Model tests", () => {
 describe("User Model tests", () => {
   it("Creates a user", async () => {
     user = await USER.createUser("Test", "Tset", "password");
-    expect(user).toEqual({
-      id: 1,
-      firstname: "Test",
-      lastname: "Tset",
-    });
+    expect(user.firstname).toEqual("Test");
+    expect(user.lastname).toEqual("Tset");
   });
   it("Gets all the users", async () => {
     const data = await USER.getAll();
