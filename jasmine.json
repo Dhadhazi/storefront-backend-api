@@ -3,10 +3,11 @@
     {
       "name": "jasmine-spec-reporter#SpecReporter",
       "options": {
-        "displayStacktrace": "all"
+        "displayStacktrace": "all",
+        "random": false
       }
     }
   ],
-  "spec_dir": "src/tests",
+  "spec_dir": "src/",
   "spec_files": ["**/*[sS]pec.ts"]
 }
