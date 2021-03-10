@@ -5,7 +5,7 @@ A storefront backend made for the Udacity Full Stack Javascript Nanodegree, ther
 ## Setup
 
 - Setup your prostges database
-- Clone the repo
+- Clone the repo 
 - Fill in the [.env requirements](#.env) or just fill in the config.ts file
 - Create a [database.json based on the requirements](#database.json) and migrate the DBs
 - Run NPM install to install the node packages
