@@ -21,6 +21,7 @@ POSTGRES_TEST_HOST=the host address
 POSTGRES_TEST_DB=name of the database
 POSTGRES_TEST_USER=username
 POSTGRES_TEST_PASSWORD=password
+ENV=dev
 ```
 
 After that, to run the tests just enter _npm run test_
