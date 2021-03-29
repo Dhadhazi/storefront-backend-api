@@ -5,7 +5,7 @@ A storefront backend made for the Udacity Full Stack Javascript Nanodegree, ther
 ## Setup
 
 - Setup your prostges database
-- Clone the repo 
+- Clone the repo
 - Fill in the [.env requirements](#.env) or just fill in the config.ts file
 - Create a [database.json based on the requirements](#database.json) and migrate the DBs
 - Run NPM install to install the node packages
@@ -17,10 +17,10 @@ A storefront backend made for the Udacity Full Stack Javascript Nanodegree, ther
 To be able to run tests, the app needs a test database. Either add it directly to config (under tests) or better, define the details in .env file:
 
 ```
-POSTGRES_TEST_HOST - the host address
-POSTGRES_TEST_DB - name of the database
-POSTGRES_TEST_USER - username
-POSTGRES_TEST_PASSWORD - password
+POSTGRES_TEST_HOST=the host address
+POSTGRES_TEST_DB=name of the database
+POSTGRES_TEST_USER=username
+POSTGRES_TEST_PASSWORD=password
 ```
 
 After that, to run the tests just enter _npm run test_
@@ -71,14 +71,14 @@ After that, to run the tests just enter _npm run test_
 
 ### .env requirements
 
-The following must be in the .env file:
+The following must be in the .env file, with your values:
 
 ```
-POSTGRES_HOST - the host address
-POSTGRES_DB - name of the database
-POSTGRES_USER - username
-POSTGRES_PASSWORD - password
-SECRET - JWT secret
+POSTGRES_HOST=the host address
+POSTGRES_DB=name of the database
+POSTGRES_USER=username
+POSTGRES_PASSWORD=password
+SECRET=JWT secret
 ```
 
 ### Required Technologies
