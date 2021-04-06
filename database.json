@@ -1,14 +1,14 @@
 {
   "dev": {
     "driver": "pg",
-    "host": "tai.db.elephantsql.com",
+    "host": "",
     "database": "",
     "user": "",
     "password": ""
   },
   "test": {
     "driver": "pg",
-    "host": "tai.db.elephantsql.com",
+    "host": "",
     "database": "",
     "user": "",
     "password": ""

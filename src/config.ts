@@ -18,7 +18,7 @@ let config: Variables;
 
 if (process.env.ENV === "test") {
   config = {
-    PORT: 8000,
+    PORT: parseInt(process.env.POSTGRES_TEST_PORT || "8000"),
     POSTGRES_HOST: process.env.POSTGRES_TEST_HOST || "",
     POSTGRES_DB: process.env.POSTGRES_TEST_DB || "",
     POSTGRES_USER: process.env.POSTGRES_TEST_USER || "",
@@ -29,7 +29,7 @@ if (process.env.ENV === "test") {
 
 if (process.env.ENV === "dev") {
   config = {
-    PORT: 8000,
+    PORT: parseInt(process.env.POSTGRES_TEST_PORT || "8000"),
     POSTGRES_HOST: process.env.POSTGRES_HOST || "",
     POSTGRES_DB: process.env.POSTGRES_DB || "",
     POSTGRES_USER: process.env.POSTGRES_USER || "",
