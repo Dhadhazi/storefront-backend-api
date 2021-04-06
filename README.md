@@ -14,7 +14,7 @@ A storefront backend made for the Udacity Full Stack Javascript Nanodegree, ther
 
 ## Tests
 
-To be able to run tests, the app needs a test database. Either add it directly to config (under tests) or better, define the details in .env file:
+To be able to run tests, the app needs a test database, which is not populated by the app data, should be empty. Either add it directly to config (under tests) or better, define the details in .env file:
 
 ```
 POSTGRES_TEST_HOST=the host address
