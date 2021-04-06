@@ -1,9 +1,11 @@
 import { Application, Router } from "express";
+import { IndexController } from "./controllers/IndexController";
 import { OrdersController } from "./controllers/OrdersController";
 import { ProductsController } from "./controllers/ProductsController";
 import { UsersController } from "./controllers/UsersController";
 
 const _routes: [string, Router][] = [
+  ["/", IndexController],
   ["/products", ProductsController],
   ["/users", UsersController],
   ["/orders", OrdersController],

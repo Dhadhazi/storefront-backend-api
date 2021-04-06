@@ -4,12 +4,13 @@ A storefront backend made for the Udacity Full Stack Javascript Nanodegree, ther
 
 ## Setup
 
-- Setup your prostges database
-- Clone the repo
-- Fill in the [.env requirements](#.env) or just fill in the config.ts file
-- Create a [database.json based on the requirements](#database.json) and migrate the DBs
-- Run NPM install to install the node packages
-- Start the app with NPM start
+- Setup your prostges database locally or with your favorite provider. My suggestion: https://www.elephantsql.com/
+- Clone the repository
+- Fill in the [.env requirements](#.env) or just fill in the config.ts file (see below the variables needed)
+- Create a [database.json based on the requirements](#database.json) (see below the schema)
+- Run `NPM install` to install the node packages
+- Run `db-migrate` command to migrate the database
+- Start the app with `NPM start`
 - Application runs in port 8000 by default (can be changed in config), database runs in port you set it up
 
 ## Tests
@@ -23,7 +24,7 @@ POSTGRES_TEST_USER=username
 POSTGRES_TEST_PASSWORD=password
 ```
 
-After that, to run the tests just enter _npm run test_
+After that, to run the tests just enter `npm run test`
 
 ## API Endpoints
 
