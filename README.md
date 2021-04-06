@@ -7,7 +7,6 @@ A storefront backend made for the Udacity Full Stack Javascript Nanodegree, ther
 - Create your prostges database locally or with your favorite provider. My suggestion: https://www.elephantsql.com/
 - Clone the repository
 - Create a `.env` file in the root, and fill it with [the required variables](#.env) or just fill in the config.ts file (see below the variables needed)
-- Fill in the [database.json based on the requirements](#database.json) (see below the schema)
 - Run `npm install` to install the node packages
 - Run `db-migrate up` command to migrate the database
 - Start the app with `npm start`
@@ -49,27 +48,6 @@ After that, to run the tests just enter `npm run test`
 - [OPTIONAL] Completed Orders by user (args: user id)[token required] orders/completed/
 - [ADDED FOR TESTING] Creating an order [token required] orders/createOrder/
 - [ADDED FOR TESTING] Add product to order [token required] orders/:orderId
-
-### database.json shape
-
-```
-{
-  "dev": {
-    "driver": "pg",
-    "host": "",
-    "database": "",
-    "user": "",
-    "password": ""
-    },
-  "test": {
-    "driver": "pg",
-    "host": "",
-    "database": "",
-    "user": "",
-    "password": ""
-  }
-}
-```
 
 ### .env requirements
 

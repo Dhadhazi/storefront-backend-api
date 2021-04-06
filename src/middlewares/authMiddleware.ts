@@ -18,7 +18,9 @@ export function authMiddleware(
   next: NextFunction
 ) {
   const req = expressRequest as RequestCustom;
-  const auth = req.headers?.authorization?.split(" ");
+  const auth = req.headers.authorization
+    ? req.headers.authorization.split(" ")
+    : [];
   if (!auth || !auth[1]) {
     res.status(401).send({
       message:
