@@ -4,7 +4,7 @@ A storefront backend made for the Udacity Full Stack Javascript Nanodegree, ther
 
 ## Setup
 
-- Setup your prostges database locally or with your favorite provider. My suggestion: https://www.elephantsql.com/
+- Create your prostges database locally or with your favorite provider. My suggestion: https://www.elephantsql.com/
 - Clone the repository
 - Fill in the [.env requirements](#.env) or just fill in the config.ts file (see below the variables needed)
 - Create a [database.json based on the requirements](#database.json) (see below the schema)
