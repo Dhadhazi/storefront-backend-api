@@ -22,10 +22,10 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Orders
 
-- Current Order by user (args: user id)[token required] orders/
-- [OPTIONAL] Completed Orders by user (args: user id)[token required] orders/completed/
-- [ADDED FOR TESTING] Creating an order [token required] orders/createOrder/
-- [ADDED FOR TESTING] Add product to order [token required] orders/:orderId
+- Current Order by user (args: user id)[token required] GET orders/
+- [OPTIONAL] Completed Orders by user (args: user id)[token required] GET orders/completed/
+- [ADDED FOR TESTING] Creating an order [token required] POST orders/createOrder/
+- [ADDED FOR TESTING] Add product to order [token required] POST orders/:orderId
 
 ## Data Shapes
 

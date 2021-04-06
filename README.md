@@ -6,12 +6,12 @@ A storefront backend made for the Udacity Full Stack Javascript Nanodegree, ther
 
 - Create your prostges database locally or with your favorite provider. My suggestion: https://www.elephantsql.com/
 - Clone the repository
-- Create a ```.env``` file in the root, and fill it with [the required variables](#.env) or just fill in the config.ts file (see below the variables needed)
+- Create a `.env` file in the root, and fill it with [the required variables](#.env) or just fill in the config.ts file (see below the variables needed)
 - Fill in the [database.json based on the requirements](#database.json) (see below the schema)
 - Run `npm install` to install the node packages
 - Run `db-migrate up` command to migrate the database
 - Start the app with `npm start`
-- Application runs in port 8000 by default (can be changed in config), database runs in port 5432 by default
+- Application runs in port 8000 , database runs in port 5432 (can be changed in .env file or config)
 
 ## Tests
 
@@ -22,6 +22,7 @@ POSTGRES_TEST_HOST=the host address
 POSTGRES_TEST_DB=name of the database
 POSTGRES_TEST_USER=username
 POSTGRES_TEST_PASSWORD=password
+POSTGRES_TEST_PORT=database port *OPTIONAL, default 5432*
 ```
 
 After that, to run the tests just enter `npm run test`
@@ -79,9 +80,11 @@ POSTGRES_HOST=the host address
 POSTGRES_DB=name of the database
 POSTGRES_USER=username
 POSTGRES_PASSWORD=password
-SECRET=JWT secret
+POSTGRES_PORT=Databse port *OPTIONAL, default 5432*
+SECRET=JWT
 ENV=dev
-PORT=port number
+PORT=port number *OPTIONAL default 8000*
+SALT_ROUNDS=salt rounds for the password *OPTIONAL default 10*
 ```
 
 ### Required Technologies

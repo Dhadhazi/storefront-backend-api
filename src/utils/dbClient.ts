@@ -6,6 +6,7 @@ const dbClient = new Pool({
   database: config.POSTGRES_DB,
   user: config.POSTGRES_USER,
   password: config.POSTGRES_PASSWORD,
+  port: config.POSTGRES_PORT,
 });
 
 export default dbClient;

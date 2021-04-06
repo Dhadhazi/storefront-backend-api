@@ -8,14 +8,6 @@ const port = config.PORT;
 
 app.use(express.urlencoded());
 
-app.get("/", function (req: Request, res: Response) {
-  res
-    .status(200)
-    .send(
-      "Storefront Backend API, please read the REQUIREMENETS.md for routes"
-    );
-});
-
 routes(app);
 
 app.use(errorHandler);
