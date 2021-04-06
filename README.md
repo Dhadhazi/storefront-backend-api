@@ -11,7 +11,7 @@ A storefront backend made for the Udacity Full Stack Javascript Nanodegree, ther
 - Run `NPM install` to install the node packages
 - Run `db-migrate up` command to migrate the database
 - Start the app with `NPM start`
-- Application runs in port 8000 by default (can be changed in config), database runs in port you set it up
+- Application runs in port 8000 by default (can be changed in config), database runs in port 5432 by default
 
 ## Tests
 
@@ -81,6 +81,7 @@ POSTGRES_USER=username
 POSTGRES_PASSWORD=password
 SECRET=JWT secret
 ENV=dev
+PORT=port number
 ```
 
 ### Required Technologies
