@@ -4,13 +4,12 @@ import { tokenToData } from "../utils/jwt";
 
 // Creating custom interface for the req, so typescripts accept the user object on it
 export interface RequestCustom extends Request {
-  user: User;
+  user?: User;
 }
 
-/*
-Puts the user data into the req object, but because Typescript does not like it had to do a workaround
-When reading it, just use: // @ts-ignore: Getting user from req
-*/
+interface TokenData {
+  user?: User
+}
 
 export function authMiddleware(
   expressRequest: Request,
@@ -28,7 +27,7 @@ export function authMiddleware(
     });
   } else {
     try {
-      const data = tokenToData(auth[1]);
+      const data = tokenToData(auth[1]) as TokenData;
 
       if (!data.user) {
         return res

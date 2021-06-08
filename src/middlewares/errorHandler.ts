@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
+import HttpException from "../models/HttpException";
 
-// There can be many types or error, and since it is a global handler, it uses any for that
 export function errorHandler(
-  err: any,
+  err: HttpException,
   req: Request,
   res: Response,
   next: NextFunction

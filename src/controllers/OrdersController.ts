@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { authMiddleware } from "../middlewares/authMiddleware";
+import { authMiddleware, RequestCustom } from "../middlewares/authMiddleware";
 import { OrderStore } from "../models/Orders";
 export const OrdersController: Router = Router();
 
@@ -8,11 +8,10 @@ const store = new OrderStore();
 OrdersController.get(
   "/",
   authMiddleware,
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: RequestCustom, res: Response, next: NextFunction) => {
     try {
-      // @ts-ignore: Getting user from req
       const user = req.user;
-      const orders = await store.getOpenOrders(user.id);
+      const orders = user !== undefined && await store.getOpenOrders(user.id);
       res.status(200).json(orders);
     } catch (e) {
       next(e);
@@ -23,11 +22,10 @@ OrdersController.get(
 OrdersController.get(
   "/completed/",
   authMiddleware,
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: RequestCustom, res: Response, next: NextFunction) => {
     try {
-      // @ts-ignore: Getting user from req
       const user = req.user;
-      const orders = await store.getCompletedOrders(user.id);
+      const orders = user !== undefined && await store.getCompletedOrders(user.id);
       res.status(200).json(orders);
     } catch (e) {
       next(e);
@@ -39,11 +37,10 @@ OrdersController.get(
 OrdersController.post(
   "/createOrder/",
   authMiddleware,
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: RequestCustom, res: Response, next: NextFunction) => {
     try {
-      // @ts-ignore: Getting user from req
       const user = req.user;
-      const order = await store.createOrder(user.id);
+      const order = user !== undefined && await store.createOrder(user.id);
       res.status(200).json(order);
     } catch (e) {
       next(e);
